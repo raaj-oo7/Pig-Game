@@ -71,13 +71,15 @@ btnRoll.addEventListener('click', function () {
             scores[activePlayer] += currentScore;
             document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
         }
-        if (scores[activePlayer] >= 40) {
+        if (scores[activePlayer] >= 20) {
 
             //finish the game
             playing = false;
             diceEl.classList.add('hidden');
             newGame.classList.remove('hidden');
-
+            
+            document.getElementById(`current--${activePlayer}`).textContent = 0;
+            currentScore = 0;
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
             document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
             document.getElementById(`winner--${activePlayer}`).innerHTML = 'congratulations🎉';
