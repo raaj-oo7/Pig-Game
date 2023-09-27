@@ -14,14 +14,15 @@ const diceEl = document.querySelector('.dice');
 const btnRoll = document.querySelector('.btn--roll');
 const newGame = document.querySelector('.btn--new');
 
-let scores, currentScore, activePlayer, playing;
+let scores = [0, 0],
+    currentScore = 0,
+    activePlayer = 0;
 
 //starting conditions
-const init = function () {
-    scores = [0, 0];
-    currentScore = 0;
-    activePlayer = 0;
-    playing = true;
+function handleResetGame() {
+    scores;
+    currentScore;
+    activePlayer;
 
     score0El.textContent = 0;
     score1El.textContent = 0;
@@ -30,60 +31,60 @@ const init = function () {
 
     newGame.classList.add('hidden');
     diceEl.classList.add('hidden');
+    btnRoll.classList.remove('hidden');
+
     player0El.classList.remove('player--winner');
     player1El.classList.remove('player--winner');
     player0El.classList.add('player--active');
     player1El.classList.remove('player--active');
     document.getElementById('winner--0').innerHTML = '';
     document.getElementById('winner--1').innerHTML = '';
-};
-init();
-
-const switchPlayer = function () {
+}
+// Switch player 
+function switchPlayer() {
     document.getElementById(`current--${activePlayer}`).textContent = 0;
     currentScore = 0;
     activePlayer = activePlayer === 0 ? 1 : 0;
     player0El.classList.toggle('player--active');
     player1El.classList.toggle('player--active');
-}
+};
+// Roll dice Event and finish game
+function handleRollDice() {
+    // 1. generating a random dice roll
+    const dice = Math.trunc(Math.random() * 6) + 1;
 
-// rolling dice functionality
-btnRoll.addEventListener('click', function () {
-    if (playing) {
+    // 2. display dice
+    diceEl.classList.remove('hidden');
+    diceEl.src = `./image/dice-${dice}.png`;
 
-        // 1. generating a random dice roll
-        const dice = Math.trunc(Math.random() * 6) + 1;
-        // console.log(dice);
+    // 3. check for rolled 1 time if true, switch to next player
+    if (dice > 0) {
+        switchPlayer();
 
-        // 2. display dice
-        diceEl.classList.remove('hidden');
-        diceEl.src = `./image/dice-${dice}.png`;
+        // Display score on current score from dice
+        currentScore = dice;
+        document.getElementById(`current--${activePlayer}`).textContent = currentScore;
 
-        // 3. check for rolled 1 time if true, switch to next player
-        if (dice > 0) {
-            switchPlayer();
+        // Display plyer score 
+        scores[activePlayer] += currentScore;
+        document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+    }
+    if (scores[activePlayer] >= 20) {
 
-            // Display score on current score from dice
-            currentScore = dice;
-            document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+        // finish the game
+        diceEl.classList.add('hidden');
+        newGame.classList.remove('hidden');
+        btnRoll.classList.add('hidden');
 
-            //Display plyer score 
-            scores[activePlayer] += currentScore;
-            document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
-        }
-        if (scores[activePlayer] >= 20) {
-
-            //finish the game
-            playing = false;
-            diceEl.classList.add('hidden');
-            newGame.classList.remove('hidden');
-            
-            document.getElementById(`current--${activePlayer}`).textContent = 0;
-            currentScore = 0;
-            document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
-            document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
-            document.getElementById(`winner--${activePlayer}`).innerHTML = 'congratulations🎉';
-        }
-    };
-});
-newGame.addEventListener('click', init);
+        document.getElementById(`current--${activePlayer}`).textContent = 0;
+        currentScore = 0;
+        document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+        document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+        document.getElementById(`winner--${activePlayer}`).innerHTML = 'congratulations🎉';
+    }
+};
+// Dice Roll event trigger
+btnRoll.addEventListener('click', handleRollDice);
+// Restart the game 
+newGame.addEventListener('click', handleResetGame);
+handleResetGame();
