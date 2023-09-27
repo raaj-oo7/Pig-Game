@@ -4,22 +4,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 html {
-    font-size: 62.5%;
+    font-size: clamp(0.2rem, 0.65vw, 3rem);
 }
 
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #ffffff;
-    background-image: linear-gradient(to top left, #a6451f 50%, #2e4498 80%);
-    align-items: center;
     font-weight: 400;
-    height: 100vh;
+    background-color: #ffffff;
     color: #fbfbfb;
+    height: 100vh;
+
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -29,21 +28,21 @@ main {
     position: relative;
     width: 100rem;
     height: 60rem;
-    background-color: rgba(117, 138, 168, 0.35);
-    backdrop-filter: blur(10px);
-    filter: blur();
-    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     border-radius: 9px;
+    background-color: #758aa859;
+    box-shadow: 0 3rem 5rem #0000004d;
+    backdrop-filter: blur(10px);
     overflow: hidden;
     display: flex;
 }
 
 .player {
-    flex: 50%;
-    padding: 4rem;
     display: flex;
+    flex: 50%;
     flex-direction: column;
     align-items: center;
+
+    padding: 4rem;
     transition: all 0.75s;
 }
 
@@ -55,7 +54,6 @@ main {
     letter-spacing: 1px;
     word-spacing: 2px;
     font-weight: 700;
-    margin-bottom: 1rem;
     margin: auto 0;
 }
 
@@ -67,7 +65,7 @@ main {
 }
 
 .player--active {
-    background-color: rgba(69, 63, 117, 0.4)
+    background-color: #453f7566
 }
 
 .current {
@@ -96,7 +94,6 @@ main {
     left: 50%;
     transform: translateX(-50%);
     color: #444;
-    background: none;
     border: none;
     font-family: inherit;
     font-size: 1.8rem;
@@ -105,8 +102,7 @@ main {
     font-weight: 400;
     transition: all 0.2s;
 
-    background-color: white;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: #ffffff99;
     backdrop-filter: blur(10px);
 
     padding: 0.7rem 2.5rem;
@@ -150,12 +146,12 @@ main {
 }
 
 .player--winner .score {
-    color: rgb(194, 194, 194);
+    color: #c2c2c2;
 }
 
 .player--winner .name {
     font-weight: 700;
-    color: #c7365f;
+    color: #ff6490;
 }
 
 .hidden {
