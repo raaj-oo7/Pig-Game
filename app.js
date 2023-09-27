@@ -14,15 +14,15 @@ const diceEl = document.querySelector('.dice');
 const btnRoll = document.querySelector('.btn--roll');
 const newGame = document.querySelector('.btn--new');
 
-let scores = [0, 0],
-    currentScore = 0,
-    activePlayer = 0;
+let scores,
+    currentScore,
+    activePlayer;
 
 //starting conditions
 function handleResetGame() {
-    scores;
-    currentScore;
-    activePlayer;
+    scores = [0, 0];
+    currentScore = 0;
+    activePlayer = 0;
 
     score0El.textContent = 0;
     score1El.textContent = 0;
